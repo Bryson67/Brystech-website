@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BrysTech | Our Apps Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Apps page specific styles */
+        
+        .app-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0e9e2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.15);
+            border-color: #ffd9c4;
+        }
+        
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #fff2e6, #ffe6d9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #FF6B2C;
+            margin-bottom: 1.2rem;
+        }
+        
+        .app-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #FF6B2C;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .app-badge.ios {
+            background: #000;
+        }
+        
+        .app-badge.android {
+            background: #3ddc84;
+            color: #000;
+        }
+        
+        .app-badge.web {
+            background: #2b4250;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            color: #555;
+        }
+        
+        .download-btn {
+            background: #FF6B2C;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: 0.2s;
+            width: 100%;
+        }
+        
+        .download-btn:hover {
+            background: #e05a1f;
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #e0e0e0;
+            border-radius: 40px;
+            padding: 8px 24px;
+            margin: 0 5px;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: #FF6B2C;
+            border-color: #FF6B2C;
+            color: white;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            border-color: #FF6B2C;
+            color: #FF6B2C;
+        }
+        
+        .app-stats {
+            background: linear-gradient(110deg, #2b4250 0%, #2e3261 100%);
+            border-radius: 28px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .feature-list li i {
+            color: #FF6B2C;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation (exactly matching home style) -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" style="background: linear-gradient(110deg, #2b4250 0%, #2e3261 100%);">
+        <div class="container">
+            <a href="./index.html"><span>Brys<div class="hub">Tech</div></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contact.html">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./apps.html">Apps</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./career.html">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./services.html">Services</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="./prices.html" class="btn btn-outline-custom me-1">Explore prices</a>
+                    <a href="./contact.html" class="btn btn-outline-custom me-1">talk to us</a>
+                    <a href="./getwebsite.html" class="btn btn-primary-custom">get your website today</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h1 class="display-5 fw-bold">Our <span class="hero-gradient">Apps Portfolio</span></h1>
+                <p class="text-secondary fs-5">Discover the innovative mobile and web applications we've built for businesses worldwide.</p>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="app-stats">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-number" id="totalAppsCount">0</div>
+                        <p class="mb-0 opacity-75">Total Apps</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-number">50K+</div>
+                        <p class="mb-0 opacity-75">Active Users</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-number">4.8</div>
+                        <p class="mb-0 opacity-75">Avg Rating</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-number">15+</div>
+                        <p class="mb-0 opacity-75">Countries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="text-center mb-5">
+                <button class="filter-btn active" data-filter="all">All Apps</button>
+                <button class="filter-btn" data-filter="ios">iOS</button>
+                <button class="filter-btn" data-filter="android">Android</button>
+                <button class="filter-btn" data-filter="web">Web App</button>
+                <button class="filter-btn" data-filter="cross">Cross-Platform</button>
+            </div>
+
+            <!-- Apps Grid -->
+            <div class="row g-4" id="appsGrid">
+                <!-- App cards will be dynamically loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Your App CTA -->
+    <section class="py-5 bg-grey">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <i class="fas fa-rocket fs-1 mb-3" style="color:#FF6B2C;"></i>
+                    <h2 class="fw-bold">Have an app idea?</h2>
+                    <p class="text-secondary fs-5">We build custom apps tailored to your business needs. Let's turn your vision into reality!</p>
+                    <a href="contact.html" class="btn btn-primary-custom px-5 py-3 mt-2">Start Your Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-5 pb-4 border-top">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="fw-bold fs-4 mb-2 footer-brand">BrysTech</div>
+                    <p class="text-secondary small">The connected business era starts here. Automate without boundaries.</p>
+                    <div class="d-flex gap-3 mt-2">
+                        <a href="#" class="footer-link"><i class="fab fa-twitter fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="fab fa-linkedin fs-5"></i></a>
+                        <a href="#" class="footer-link"><i class="fab fa-github fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Product</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="get-website.html" class="footer-link">Websites</a></li>
+                                <li><a href="apps.html" class="footer-link">Apps</a></li>
+                                <li><a href="services.html" class="footer-link">Software</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Solutions</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="services.html" class="footer-link">Marketing</a></li>
+                                <li><a href="services.html" class="footer-link">Development</a></li>
+                                <li><a href="services.html" class="footer-link">Consulting</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Company</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="contact.html" class="footer-link">About</a></li>
+                                <li><a href="careers.html" class="footer-link">Careers</a></li>
+                                <li><a href="careers.html" class="footer-link">Join</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Support</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="contact.html" class="footer-link">Contact</a></li>
+                                <li><a href="#" class="footer-link">FAQ</a></li>
+                                <li><a href="#" class="footer-link">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center text-secondary small">&copy; 2025 BrysTech — Innovative apps for modern businesses.</div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Button -->
+    <button class="ai-chat-btn" id="aiChatBtn">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div id="chatModal" class="chat-modal hidden">
+        <div class="chat-header">
+            <span><i class="fas fa-robot me-2"></i>Brys AI Assistant</span>
+            <button id="closeChatBtn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="bubble">📱 Hi! Interested in our apps? Ask me about any app, features, or how we can build one for you!</div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask about our apps...">
+            <button id="sendChatBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Apps Data - All created apps posted here
+        const appsData = [{
+            id: 1,
+            name: "campushub",
+            description: "gaming platform for students that connects them with peers and resources.",
+            icon: "fas fa-gamepad",
+            platform: "cross",
+            platformBadge: "Cross-Platform",
+            platformColor: "cross",
+            tech: ["React Native", "Node.js", "MongoDB", "Stripe"],
+            rating: 4.9,
+            downloads: "50K+",
+            features: ["AI recommendations", "Real-time tracking", "One-click checkout", "Push notifications"],
+            image: "🛍️",
+            releaseDate: "Jan 2024"
+        }, {
+            id: 2,
+            name: "HealthTrack Pro",
+            description: "Comprehensive health monitoring app with fitness tracking, medication reminders, and telemedicine integration.",
+            icon: "fas fa-heartbeat",
+            platform: "ios",
+            platformBadge: "iOS",
+            platformColor: "ios",
+            tech: ["Swift", "HealthKit", "Firebase", "CoreML"],
+            rating: 4.8,
+            downloads: "100K+",
+            features: ["Fitness tracking", "Medication reminders", "Doctor chat", "Health reports"],
+            image: "🏃‍♂️",
+            releaseDate: "Mar 2024"
+        }, {
+            id: 3,
+            name: "FinWise",
+            description: "Personal finance manager that helps users track expenses, create budgets, and achieve financial goals.",
+            icon: "fas fa-chart-line",
+            platform: "android",
+            platformBadge: "Android",
+            platformColor: "android",
+            tech: ["Kotlin", "Room DB", "Retrofit", "MPAndroidChart"],
+            rating: 4.7,
+            downloads: "200K+",
+            features: ["Expense tracking", "Budget planning", "Bill reminders", "Financial insights"],
+            image: "💰",
+            releaseDate: "Jun 2024"
+        }, {
+            id: 4,
+            name: "EduLearn",
+            description: "Online learning platform with interactive courses, live classes, quizzes, and certification programs.",
+            icon: "fas fa-graduation-cap",
+            platform: "cross",
+            platformBadge: "Cross-Platform",
+            platformColor: "cross",
+            tech: ["Flutter", "Firebase", "WebRTC", "AWS"],
+            rating: 4.9,
+            downloads: "150K+",
+            features: ["Live classes", "Video library", "Quizzes", "Certificates", "Discussion forums"],
+            image: "📚",
+            releaseDate: "Aug 2024"
+        }, {
+            id: 5,
+            name: "TaskFlow",
+            description: "Project management and team collaboration tool with Kanban boards, time tracking, and team chat.",
+            icon: "fas fa-tasks",
+            platform: "web",
+            platformBadge: "Web App",
+            platformColor: "web",
+            tech: ["React", "Django", "PostgreSQL", "WebSockets"],
+            rating: 4.6,
+            downloads: "75K+",
+            features: ["Kanban boards", "Time tracking", "Team chat", "File sharing", "Reports"],
+            image: "📋",
+            releaseDate: "Sep 2024"
+        }, {
+            id: 6,
+            name: "RideSwift",
+            description: "Ride-hailing and delivery app connecting users with nearby drivers for quick and safe transportation.",
+            icon: "fas fa-car",
+            platform: "cross",
+            platformBadge: "Cross-Platform",
+            platformColor: "cross",
+            tech: ["React Native", "Node.js", "Socket.io", "Google Maps API"],
+            rating: 4.8,
+            downloads: "300K+",
+            features: ["Real-time tracking", "Cashless payments", "Driver rating", "SOS button"],
+            image: "🚗",
+            releaseDate: "Oct 2024"
+        }, {
+            id: 7,
+            name: "FoodieDash",
+            description: "Food delivery app with restaurant discovery, order tracking, and loyalty rewards program.",
+            icon: "fas fa-utensils",
+            platform: "ios",
+            platformBadge: "iOS",
+            platformColor: "ios",
+            tech: ["SwiftUI", "MapKit", "Firebase", "Alamofire"],
+            rating: 4.7,
+            downloads: "80K+",
+            features: ["Restaurant finder", "Order tracking", "Rewards points", "Live chat support"],
+            image: "🍕",
+            releaseDate: "Nov 2024"
+        }, {
+            id: 8,
+            name: "EventHub",
+            description: "Event management and ticketing platform for concerts, conferences, and local events.",
+            icon: "fas fa-calendar-alt",
+            platform: "android",
+            platformBadge: "Android",
+            platformColor: "android",
+            tech: ["Kotlin", "Compose", "Room", "ZXing"],
+            rating: 4.5,
+            downloads: "45K+",
+            features: ["Event discovery", "QR tickets", "Calendar sync", "Social sharing"],
+            image: "🎫",
+            releaseDate: "Dec 2024"
+        }, {
+            id: 9,
+            name: "PropManage",
+            description: "Property management solution for landlords and tenants with rent collection and maintenance requests.",
+            icon: "fas fa-building",
+            platform: "web",
+            platformBadge: "Web App",
+            platformColor: "web",
+            tech: ["Vue.js", "Laravel", "MySQL", "Bootstrap"],
+            rating: 4.8,
+            downloads: "30K+",
+            features: ["Rent collection", "Maintenance tickets", "Lease management", "Document storage"],
+            image: "🏢",
+            releaseDate: "Jan 2025"
+        }, {
+            id: 10,
+            name: "MediBook",
+            description: "Healthcare appointment booking system connecting patients with doctors and clinics.",
+            icon: "fas fa-hospital-user",
+            platform: "cross",
+            platformBadge: "Cross-Platform",
+            platformColor: "cross",
+            tech: ["Flutter", "Firebase", "Stripe", "Zoom API"],
+            rating: 4.9,
+            downloads: "120K+",
+            features: ["Doctor search", "Video consultations", "Medical records", "Prescriptions"],
+            image: "🏥",
+            releaseDate: "Feb 2025"
+        }, {
+            id: 11,
+            name: "SocialConnect",
+            description: "Social networking platform for communities with posts, stories, messaging, and groups.",
+            icon: "fas fa-users",
+            platform: "cross",
+            platformBadge: "Cross-Platform",
+            platformColor: "cross",
+            tech: ["React Native", "GraphQL", "Redis", "AWS S3"],
+            rating: 4.6,
+            downloads: "500K+",
+            features: ["News feed", "Stories", "Direct messaging", "Groups", "Live streaming"],
+            image: "👥",
+            releaseDate: "Mar 2025"
+        }, {
+            id: 12,
+            name: "InvoiceMaster",
+            description: "Professional invoicing and accounting app for freelancers and small businesses.",
+            icon: "fas fa-file-invoice-dollar",
+            platform: "web",
+            platformBadge: "Web App",
+            platformColor: "web",
+            tech: ["Angular", "Express.js", "MongoDB", "PDFKit"],
+            rating: 4.7,
+            downloads: "60K+",
+            features: ["Invoice creation", "Payment tracking", "Expense reports", "Tax calculation"],
+            image: "📄",
+            releaseDate: "Apr 2025"
+        }];
+
+        let currentFilter = "all";
+
+        function renderApps() {
+            const appsGrid = document.getElementById("appsGrid");
+            const filteredApps = currentFilter === "all" ?
+                appsData :
+                appsData.filter(app => app.platform === currentFilter);
+
+            // Update total apps count
+            document.getElementById("totalAppsCount").innerText = appsData.length;
+
+            if (filteredApps.length === 0) {
+                appsGrid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x text-secondary mb-3"></i>
+                        <h4>No apps found</h4>
+                        <p class="text-secondary">Try a different filter category</p>
+                    </div>
+                `;
+                return;
+            }
+
+            appsGrid.innerHTML = filteredApps.map(app => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="app-card" data-platform="${app.platform}">
+                        <div class="app-badge ${app.platformColor}">${app.platformBadge}</div>
+                        <div class="app-icon">
+                            <i class="${app.icon}"></i>
+                        </div>
+                        <h3 class="fw-bold fs-4">${app.name}</h3>
+                        <div class="rating-stars mb-2">
+                            ${generateStars(app.rating)} 
+                            <span class="text-secondary ms-1">(${app.rating})</span>
+                        </div>
+                        <p class="text-secondary small">${app.description}</p>
+                        
+                        <div class="mb-3">
+                            ${app.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong>Key Features:</strong>
+                            <ul class="feature-list mt-2">
+                                ${app.features.map(f => `<li><i class="fas fa-check-circle"></i>${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                            <div>
+                                <small class="text-muted">
+                                    <i class="fas fa-download me-1"></i> ${app.downloads}
+                                </small>
+                                <small class="text-muted ms-2">
+                                    <i class="fas fa-calendar me-1"></i> ${app.releaseDate}
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <button class="download-btn mt-3" onclick="showAppDetails(${app.id})">
+                            <i class="fas fa-info-circle me-2"></i>View Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+        
+        function showAppDetails(appId) {
+            const app = appsData.find(a => a.id === appId);
+            if (app) {
+                alert(`📱 ${app.name}\n\n${app.description}\n\nPlatform: ${app.platformBadge}\nRating: ${app.rating}\nDownloads: ${app.downloads}\n\nTech Stack: ${app.tech.join(", ")}\n\nReleased: ${app.releaseDate}\n\nInterested in this app? Contact us to get a similar one built for your business!`);
+            }
+        }
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.getAttribute('data-filter');
+                renderApps();
+            });
+        });
+        
+        // Initial render
+        renderApps();
+        
+        // AI Chatbot override for apps page
+        const originalGetBotResponse = window.getBotResponse;
+        if (typeof window.updateChatBotForApps !== 'undefined') {
+            // Use custom apps response if needed
+        }
+        
+        // Enhance chat for apps page
+        if (typeof window !== 'undefined' && window.getBotResponse) {
+            const originalResponse = window.getBotResponse;
+            window.getBotResponse = function(msg) {
+                const lowerMsg = msg.toLowerCase();
+                if (lowerMsg.includes('app') || lowerMsg.includes('apps') || lowerMsg.includes('mobile app')) {
+                    if (lowerMsg.includes('list') || lowerMsg.includes('show') || lowerMsg.includes('what apps')) {
+                        return "📱 We have 12+ amazing apps including SmartShop (e-commerce), HealthTrack Pro (health), FinWise (finance), EduLearn (education), TaskFlow (project management), RideSwift (ride-hailing), and more! Check out our Apps page for the complete portfolio. Which one interests you?";
+                    } else if (lowerMsg.includes('build') || lowerMsg.includes('create app')) {
+                        return "🚀 Yes! We build custom mobile and web apps for any business. Our process: Discovery → Design → Development → Testing → Launch. Starting from $2,500. Want to discuss your app idea? Visit our Contact page!";
+                    } else if (lowerMsg.includes('smartshop') || lowerMsg.includes('e-commerce')) {
+                        return "🛍️ SmartShop is our AI-powered e-commerce platform with 50K+ downloads and 4.9 rating. Features include personalized recommendations and real-time inventory tracking. Interested in something similar?";
+                    } else if (lowerMsg.includes('healthtrack') || lowerMsg.includes('health')) {
+                        return "🏥 HealthTrack Pro helps users monitor fitness, set medication reminders, and consult doctors online. It has 100K+ downloads on iOS. Would you like a healthcare app for your business?";
+                    }
+                    return "📱 Our Apps page showcases 12+ innovative apps (iOS, Android, Web). Check them out! Need a custom app built? Click 'Start Your Project' on our Apps page!";
+                }
+                if (originalResponse) return originalResponse(msg);
+                return "👋 Hi! I'm Brys AI. Ask me about our apps, services, pricing, or how we can build your next app!";
+            };
+        }
+    </script>
+    <script>
+        // Extend the global chat response for apps
+        (function extendChatForApps() {
+            if (typeof window !== 'undefined') {
+                const originalSendMessage = window.handleSendMessage;
+                window.getBotResponse = function(userMsg) {
+                    const msg = userMsg.toLowerCase();
+                    if (msg.includes('app') || msg.includes('apps')) {
+                        if (msg.includes('list') || msg.includes('show') || msg.includes('what')) {
+                            return "📱 We have 12+ amazing apps including SmartShop (AI e-commerce), HealthTrack Pro, FinWise, EduLearn, TaskFlow, RideSwift, and more! Visit our Apps page to see the full portfolio with ratings, tech stacks, and features.";
+                        } else if (msg.includes('build') || msg.includes('create') || msg.includes('make app')) {
+                            return "🚀 Absolutely! We specialize in custom app development for iOS, Android, and Web. Prices start from $2,500. Share your idea via our Contact page and we'll get back within 24 hours!";
+                        } else if (msg.includes('price') || msg.includes('cost')) {
+                            return "💰 App development costs vary based on complexity: Basic app ($2,500-$5,000), Medium complexity ($5,000-$12,000), Complex/Enterprise ($12,000+). Contact us for a detailed quote!";
+                        }
+                        return "📱 Great question! We've built 12+ successful apps across various industries. Which category interests you: E-commerce, Health, Finance, Education, or Productivity?";
+                    }
+                    // Default responses for other queries
+                    if (msg.includes('price') || msg.includes('pricing')) {
+                        return "💰 Our website plans start at $499 one-time for Starter. App development starts at $2,500. Check our Prices page for detailed packages!";
+                    } else if (msg.includes('service')) {
+                        return "🛠️ We offer: Web Development, Mobile Apps, Software Consulting, AI Integration, Cloud Solutions, and Cybersecurity. Anything specific you're interested in?";
+                    } else if (msg.includes('career') || msg.includes('job')) {
+                        return "💼 We're hiring! Check our Careers page for open positions including Full-Stack Dev, Product Manager, and UI/UX Designer.";
+                    } else if (msg.includes('contact')) {
+                        return "📞 You can reach us at hello@brystech.com or +254 700 123 456. Visit our Contact page for the form!";
+                    } else if (msg.includes('hello') || msg.includes('hi')) {
+                        return "👋 Hello! I'm Brys AI. Ask me about our apps, services, pricing, or how to start your project!";
+                    }
+                    return "🤖 Thanks for reaching out! For specific inquiries, please use our contact form. Meanwhile, check out our Apps page to see our portfolio!";
+                };
+            }
+        })();
+    </script>
+
+    <!-- Ensure chat loads correctly -->
+    <script>
+        // Wait for all content to load
+        window.addEventListener('load', function() {
+            console.log('Apps page fully loaded');
+            // Re-initialize chat if needed
+            if (typeof window.toggleChat !== 'undefined') {
+                console.log('Chat functions available');
+            }
+        });
+    </script>
+</body>
+
+</html>

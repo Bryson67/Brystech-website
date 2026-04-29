@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Campushub - Tournament Gaming Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        /* Animated background */
+        
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes moveBackground {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        /* Header Section */
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            border-radius: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo svg {
+            width: 60px;
+            height: 60px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        /* Hero Section */
+        
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            background: #4ade80;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            min-width: 280px;
+        }
+        
+        .phone-mockup {
+            background: #1e1e2e;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            margin: 0 auto;
+        }
+        
+        .phone-mockup .screen {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 30px;
+            padding: 20px;
+            aspect-ratio: 9 / 16;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        /* Download Section */
+        
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: #00ff88;
+            color: #1a1a2e;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 20px 0;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .qr-code {
+            margin: 20px 0;
+        }
+        
+        .qr-code canvas {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        
+        .version-info {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        /* Features Grid */
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        /* Steps Section */
+        
+        .steps {
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .steps h2 {
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+        
+        .step-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #00ff88;
+            color: #1a1a2e;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        /* Footer */
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        /* Responsive */
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .hero {
+                flex-direction: column;
+            }
+            .download-btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            .download-section {
+                padding: 30px 20px;
+            }
+        }
+        /* Button styles */
+        
+        .btn-secondary {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        /* Alert/Success message */
+        
+        .alert {
+            background: #00ff88;
+            color: #1a1a2e;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .alert.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <h1>BrysTech Solutions</h1>
+            <h2>Campushub - Tournament Gaming Platform</h2>
+            <div class="tagline">Compete. Win. Dominate.</div>
+        </div>
+
+        <!-- Alert Message -->
+        <div id="alert" class="alert">
+            🎉 Download started! Check your downloads folder.
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Tournament Gaming Platform</h2>
+                <p>Join tournaments, compete with players, and win real cash prizes!</p>
+                <ul class="feature-list">
+                    <li>Multiple tournaments daily</li>
+                    <li>Real cash prizes</li>
+                    <li>Instant withdrawals via M-Pesa</li>
+                    <li>Live match tracking & brackets</li>
+                </ul>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="screen">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        <p style="margin-top: 20px; font-size: 14px;">Campushub App</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+            <h2>Download Campushub</h2>
+            <p>Get the latest version of our app</p>
+
+            <a href="#" id="downloadLink" class="download-btn" onclick="startDownload(event)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                </svg> Download APK
+            </a>
+
+            <div class="qr-code" id="qrCode"></div>
+            <div class="version-info">
+                Version 1.0.0 • 50.2 MB • Requires Android 7.0+
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Multiple Games</h3>
+                <p>PUBG, Call of Duty, FIFA, eFootball and more!</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Real Prizes</h3>
+                <p>Win real money via M-Pesa instant payouts</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Tournaments</h3>
+                <p>Daily tournaments with knockout brackets</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Live Lobby</h3>
+                <p>Real-time player updates and match tracking</p>
+            </div>
+        </div>
+
+        <!-- Installation Steps -->
+        <div class="steps">
+            <h2>How to Install</h2>
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Download APK</h3>
+                    <p>Click the download button above</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Allow Installation</h3>
+                    <p>Enable "Install from unknown sources"</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Install & Play</h3>
+                    <p>Open the app and start competing!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Note -->
+        <div class="download-section" style="background: rgba(0,0,0,0.3);">
+            <p style="font-size: 0.9rem;">🔒 Secure Payment System • 24/7 Support • Fair Play Guaranteed</p>
+            <a href="#" class="btn-secondary" onclick="showInstructions(event)">📖 Installation Instructions</a>
+        </div>
+
+        <p>for more apps like this visist
+            <a href="../index.html">BRYSTECH SOlUTIONS</a>
+        </p>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2026 Campushub. All rights reserved.</p>
+            <p>Made with ❤️ for gamers</p>
+        </div>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // Replace this with your actual APK download link when you have it
+        // Example: Your EAS build download link from Expo
+        const APK_DOWNLOAD_URL = "https://expo.dev/artifacts/eas/uqoM4r24NrpLqQU8asWfEk.apk";
+
+        // Generate QR Code
+        const qrcode = new QRCode(document.getElementById("qrCode"), {
+            text: APK_DOWNLOAD_URL,
+            width: 150,
+            height: 150,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        function startDownload(event) {
+            event.preventDefault();
+
+            const alertBox = document.getElementById('alert');
+            alertBox.classList.add('show');
+
+            // Trigger download
+            const link = document.createElement('a');
+            link.href = APK_DOWNLOAD_URL;
+            link.download = 'campushub.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Hide alert after 3 seconds
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 3000);
+        }
+
+        function showInstructions(event) {
+            event.preventDefault();
+            alert("Installation Instructions:\n\n1. After downloading, open the APK file\n2. Tap 'Settings' if prompted\n3. Enable 'Allow from this source'\n4. Go back and tap 'Install'\n5. Open the app and start playing!");
+        }
+
+        // Update the download link dynamically if needed
+        function updateDownloadLink(url) {
+            const downloadBtn = document.getElementById('downloadLink');
+            downloadBtn.href = url;
+
+            // Update QR Code
+            document.getElementById("qrCode").innerHTML = "";
+            new QRCode(document.getElementById("qrCode"), {
+                text: url,
+                width: 150,
+                height: 150,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // If you have a dynamic URL, you can call this after your build completes
+        // Example: updateDownloadLink("https://your-actual-download-link.apk");
+
+        console.log("Download page ready!");
+    </script>
+
+</body>
+
+</html>

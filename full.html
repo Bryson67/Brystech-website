@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BrysTech | Complete Platform</title>
+    <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #fefcf9;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar-custom {
+            background: linear-gradient(110deg, #2b4250 0%, #2e3261 100%);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white;
+            font-weight: 500;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #FFCF9A;
+        }
+        
+        .btn-outline-custom {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            background: transparent;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        
+        .btn-outline-custom:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            color: white;
+        }
+        
+        .btn-primary-custom {
+            background: #FF6B2C;
+            border: none;
+            color: white;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        
+        .btn-primary-custom:hover {
+            background: #e05a1f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(255, 107, 44, 0.3);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF6B2C, #9b4dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature-card,
+        .price-card,
+        .service-card,
+        .career-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e9e2;
+        }
+        
+        .feature-card:hover,
+        .price-card:hover,
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.08);
+            border-color: #ffd9c4;
+        }
+        
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            background: #fff2e6;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #FF6B2C;
+            margin-bottom: 1.4rem;
+        }
+        
+        .bg-grey {
+            background-color: #faf7f2;
+        }
+        
+        .footer-link {
+            text-decoration: none;
+            color: #bbccdd;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        
+        .footer-link:hover {
+            color: #FF6B2C;
+        }
+        /* AI Chat Button */
+        
+        .ai-chat-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B2C, #9b4dff);
+            border: none;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ai-chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(255, 107, 44, 0.4);
+        }
+        /* Chat Modal */
+        
+        .chat-modal {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-modal.hidden {
+            display: none;
+        }
+        
+        .chat-header {
+            background: linear-gradient(110deg, #2b4250, #2e3261);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+        
+        .message {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message.user {
+            align-items: flex-end;
+        }
+        
+        .message.bot {
+            align-items: flex-start;
+        }
+        
+        .message .bubble {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+        }
+        
+        .message.user .bubble {
+            background: #FF6B2C;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message.bot .bubble {
+            background: #e9ecef;
+            color: #1e2a3e;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+        
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            padding: 10px 15px;
+            outline: none;
+        }
+        
+        .chat-input-area button {
+            background: #FF6B2C;
+            border: none;
+            color: white;
+            border-radius: 30px;
+            margin-left: 8px;
+            padding: 0 18px;
+        }
+        
+        .typing-indicator {
+            font-style: italic;
+            color: #888;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+        }
+        
+        @media (max-width: 576px) {
+            .chat-modal {
+                width: 300px;
+                height: 450px;
+                right: 15px;
+                bottom: 85px;
+            }
+            .ai-chat-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <!-- Navigation (exactly matching home style) -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" style="background: linear-gradient(110deg, #2b4250 0%, #2e3261 100%);">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="#"><span>Brys<div class="hub" style="display: inline-block;">Tech</div></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contact.html">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" style="color:#FFCF9A;" href="./about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./apps.html">Apps</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./career.html">Careers</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-outline-custom me-1">Explore prices</a>
+                    <a href="#" class="btn btn-outline-custom me-1">talk to us</a>
+                    <a href="#" class="btn btn-primary-custom">get your website today</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dynamic Page Content -->
+    <main id="pageContent" class="py-4">
+        <!-- Home page will be loaded by default -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-5 pb-4 border-top" style="background: linear-gradient(110deg, #1a1b20 0%, #123741 100%);">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="fw-bold fs-4 mb-2" style="color:#FF6B2C;">BrysTech</div>
+                    <p class="text-secondary small">The connected business era starts here. Automate without boundaries.</p>
+                    <div class="d-flex gap-3 mt-2">
+                        <a href="#" class="text-secondary"><i class="fab fa-twitter fs-5"></i></a>
+                        <a href="#" class="text-secondary"><i class="fab fa-linkedin fs-5"></i></a>
+                        <a href="#" class="text-secondary"><i class="fab fa-github fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Product</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link" data-page="getwebsite">Websites</a></li>
+                                <li><a href="#" class="footer-link" data-page="services">Apps</a></li>
+                                <li><a href="#" class="footer-link" data-page="services">Software</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Solutions</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link" data-page="services">Marketing</a></li>
+                                <li><a href="#" class="footer-link" data-page="services">Development</a></li>
+                                <li><a href="#" class="footer-link" data-page="services">Consulting</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Resources</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Blog</a></li>
+                                <li><a href="#" class="footer-link">Help</a></li>
+                                <li><a href="#" class="footer-link">Community</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <h6 class="fw-bold text-white">Company</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link" data-page="careers">Careers</a></li>
+                                <li><a href="#" class="footer-link" data-page="contact">About</a></li>
+                                <li><a href="#" class="footer-link">Press</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center text-secondary small">&copy; 2025 BrysTech — Automate Without Limits.</div>
+        </div>
+    </footer>
+
+    <!-- AI Chat Button & Modal -->
+    <button class="ai-chat-btn" id="aiChatBtn"><i class="fas fa-comment-dots"></i></button>
+    <div id="chatModal" class="chat-modal hidden">
+        <div class="chat-header">
+            <span><i class="fas fa-robot me-2"></i>Brys AI Assistant</span>
+            <button id="closeChatBtn" style="background: none; border: none; color: white; font-size: 20px;">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="bubble">👋 Hi! I'm Brys AI. Ask me anything about our services, pricing, careers, or get help with your website! How can I assist you today?</div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask me anything..." autocomplete="off">
+            <button id="sendChatBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ======================== PAGE DATA (Content for each page) ========================
+        const pages = {
+            home: `<!-- Home Hero -->
+            <section class="py-5 mt-2"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6"><div class="hero-badge mb-2"><span class="badge bg-light text-dark p-2 px-3 rounded-pill fw-semibold"><i class="fas fa-crown me-1"></i>BrysTech solutions is here</span></div><h1 class="display-4 fw-bold">Develop <span class="hero-gradient">without limits</span></h1><p class="lead text-secondary">Turn your ideas into smooth operations by developing softwares yourself — no developers, no IT tickets, no delays. The only limit is your imagination.</p><div class="d-flex flex-wrap gap-3 mt-4"><button class="btn btn-primary-custom px-4 py-3 fs-6 shadow-sm" data-page="contact">Call us today</button><button class="btn btn-google-style px-4 py-3"><i class="fab fa-google"></i> email us on gmail</button></div><div class="mt-4 d-flex gap-4"><div><i class="fas fa-check-circle text-success"></i> No credit card</div><div><i class="fas fa-infinity"></i> Free forever plan</div><div><i class="fas fa-rocket text-primary"></i> 10+ apps</div></div></div><div class="col-lg-6 text-center"><img src="https://placehold.co/600x450/2b4250/white?text=BrysTech+Dashboard" class="img-fluid rounded-4 shadow-lg" style="width:100%"></div></div></div></section>
+            <section class="py-5 bg-grey"><div class="container"><div class="text-center mb-5"><h2 class="display-6 fw-bold">Transform how you work</h2><p class="text-secondary">Empower every team with no‑code automation.</p></div><div class="row g-4"><div class="col-md-3"><div class="feature-card"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>APPS</h3><p>Custom mobile apps for easy business management.</p></div></div><div class="col-md-3"><div class="feature-card"><div class="feature-icon"><i class="fas fa-globe"></i></div><h3>Websites</h3><p>Modern websites that drive conversions.</p></div></div><div class="col-md-3"><div class="feature-card"><div class="feature-icon"><i class="fas fa-laptop-code"></i></div><h3>Software</h3><p>Tailored software for any platform.</p></div></div><div class="col-md-3"><div class="feature-card"><div class="feature-icon"><i class="fas fa-database"></i></div><h3>Data management</h3><p>Sync and enrich your business data.</p></div></div></div></div></section>`,
+
+            services: `<section class="py-5"><div class="container"><div class="text-center mb-5"><h1 class="display-5 fw-bold">Our <span class="hero-gradient">Services</span></h1><p class="text-secondary fs-5">End-to-end digital solutions tailored for your success.</p></div><div class="row g-4"><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-code"></i></div><h3>Custom Web Development</h3><p>Responsive, high-performance websites built with modern frameworks. E-commerce, CMS, and more.</p><ul class="list-unstyled mt-3"><li><i class="fas fa-check-circle text-success me-2"></i>SEO Optimized</li><li><i class="fas fa-check-circle text-success me-2"></i>Mobile-first design</li></ul></div></div><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>Mobile App Development</h3><p>iOS & Android apps that engage users and streamline operations. Native & cross-platform.</p></div></div><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Software Consulting</h3><p>Strategic tech advisory, digital transformation, and automation audits for businesses.</p></div></div><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-robot"></i></div><h3>AI Integration</h3><p>Integrate AI chatbots, computer vision, and data intelligence into your workflows.</p></div></div><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-cloud"></i></div><h3>Cloud Solutions</h3><p>AWS, Azure, Google Cloud setup, migration, and optimization for scale.</p></div></div><div class="col-md-6 col-lg-4"><div class="service-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Cybersecurity</h3><p>Protect your digital assets with advanced security audits and implementation.</p></div></div></div></div></section>`,
+
+            prices: `<section class="py-5"><div class="container"><div class="text-center mb-5"><h1 class="display-5 fw-bold">Simple, <span class="hero-gradient">Transparent</span> Pricing</h1><p class="text-secondary">Choose the perfect plan for your business growth.</p></div><div class="row g-4 justify-content-center"><div class="col-md-4"><div class="price-card text-center"><div class="feature-icon mx-auto mb-3"><i class="fas fa-rocket"></i></div><h3>Starter</h3><div class="display-6 fw-bold mt-3">$499</div><p class="text-secondary">one-time</p><hr><ul class="list-unstyled"><li><i class="fas fa-check text-success"></i> Basic 5-page website</li><li><i class="fas fa-check text-success"></i> Responsive design</li><li><i class="fas fa-check text-success"></i> Contact form</li><li><i class="fas fa-times text-danger"></i> CMS access</li></ul><button class="btn btn-primary-custom mt-3 w-100" data-page="getwebsite">Get started</button></div></div><div class="col-md-4"><div class="price-card text-center border border-warning"><div class="feature-icon mx-auto mb-3 bg-warning bg-opacity-10"><i class="fas fa-crown"></i></div><h3>Business <span class="badge bg-warning">Popular</span></h3><div class="display-6 fw-bold mt-3">$1,299</div><p class="text-secondary">one-time</p><hr><ul class="list-unstyled"><li><i class="fas fa-check text-success"></i> Up to 15 pages + blog</li><li><i class="fas fa-check text-success"></i> Custom admin panel</li><li><i class="fas fa-check text-success"></i> SEO optimized</li><li><i class="fas fa-check text-success"></i> 1 year support</li></ul><button class="btn btn-primary-custom mt-3 w-100" data-page="getwebsite">Choose plan</button></div></div><div class="col-md-4"><div class="price-card text-center"><div class="feature-icon mx-auto mb-3"><i class="fas fa-chart-line"></i></div><h3>Enterprise</h3><div class="display-6 fw-bold mt-3">Custom</div><p class="text-secondary">tailored quote</p><hr><ul class="list-unstyled"><li><i class="fas fa-check text-success"></i> Full-stack custom solution</li><li><i class="fas fa-check text-success"></i> Dedicated team</li><li><i class="fas fa-check text-success"></i> Advanced integrations</li><li><i class="fas fa-check text-success"></i> SLA & 24/7 support</li></ul><button class="btn btn-outline-custom mt-3 w-100" style="border-color:#FF6B2C; color:#FF6B2C;" data-page="contact">Contact sales</button></div></div></div></div></section>`,
+
+            careers: `<section class="py-5"><div class="container"><div class="text-center mb-5"><h1 class="display-5 fw-bold">Join the <span class="hero-gradient">BrysTech</span> Team</h1><p class="text-secondary fs-5">We're building the future of automation — and we want you with us.</p></div><div class="row g-4"><div class="col-md-6 col-lg-4"><div class="career-card"><i class="fas fa-laptop-code fs-1 mb-3" style="color:#FF6B2C;"></i><h3>Senior Full-Stack Dev</h3><p>Remote · Full-time</p><p class="text-secondary">React, Node.js, cloud experience. Build scalable platforms.</p><button class="btn btn-sm btn-primary-custom mt-2">Apply now →</button></div></div><div class="col-md-6 col-lg-4"><div class="career-card"><i class="fas fa-chalkboard-user fs-1 mb-3" style="color:#FF6B2C;"></i><h3>Product Manager</h3><p>Nairobi / Hybrid</p><p class="text-secondary">Lead product strategy for our no-code ecosystem.</p><button class="btn btn-sm btn-primary-custom mt-2">Apply now →</button></div></div><div class="col-md-6 col-lg-4"><div class="career-card"><i class="fas fa-headset fs-1 mb-3" style="color:#FF6B2C;"></i><h3>Customer Success Lead</h3><p>Remote · Global</p><p class="text-secondary">Ensure client happiness & adoption of our solutions.</p><button class="btn btn-sm btn-primary-custom mt-2">Apply now →</button></div></div><div class="col-md-6 col-lg-4"><div class="career-card"><i class="fas fa-chart-simple fs-1 mb-3" style="color:#FF6B2C;"></i><h3>Digital Marketing Manager</h3><p>Remote · Full-time</p><p class="text-secondary">Drive growth, SEO & content strategy.</p><button class="btn btn-sm btn-primary-custom mt-2">Apply now →</button></div></div><div class="col-md-6 col-lg-4"><div class="career-card"><i class="fas fa-palette fs-1 mb-3" style="color:#FF6B2C;"></i><h3>UI/UX Designer</h3><p>Flexible</p><p class="text-secondary">Create stunning interfaces for web & mobile apps.</p><button class="btn btn-sm btn-primary-custom mt-2">Apply now →</button></div></div></div><div class="text-center mt-5 p-4 bg-grey rounded-4"><h4>Don't see your role?</h4><p class="text-secondary">Send your resume to <strong>careers@brystech.com</strong> and we’ll keep you in mind!</p></div></div></section>`,
+
+            contact: `<section class="py-5"><div class="container"><div class="row g-5"><div class="col-lg-6"><h1 class="display-5 fw-bold">Let's<span class="hero-gradient"> Connect</span></h1><p class="lead text-secondary">We'd love to hear from you. Fill the form or reach out directly.</p><div class="mt-4"><div class="d-flex mb-4"><i class="fas fa-map-marker-alt fs-3 me-3" style="color:#FF6B2C;"></i><div><h5>Visit us</h5><p>123 Innovation Hub, Nairobi, Kenya</p></div></div><div class="d-flex mb-4"><i class="fas fa-phone-alt fs-3 me-3" style="color:#FF6B2C;"></i><div><h5>Call us</h5><p>+254 700 123 456</p></div></div><div class="d-flex"><i class="fas fa-envelope fs-3 me-3" style="color:#FF6B2C;"></i><div><h5>Email</h5><p>hello@brystech.com | support@brystech.com</p></div></div></div></div><div class="col-lg-6"><div class="glass-card p-4 shadow rounded-4 bg-white"><h3 class="mb-3">Send a Message</h3><form id="contactForm"><div class="mb-3"><input type="text" class="form-control" placeholder="Full name" required></div><div class="mb-3"><input type="email" class="form-control" placeholder="Email address" required></div><div class="mb-3"><input type="text" class="form-control" placeholder="Phone (optional)"></div><div class="mb-3"><textarea rows="4" class="form-control" placeholder="Tell us about your project..."></textarea></div><button type="submit" class="btn btn-primary-custom w-100 py-2">Send message <i class="fas fa-arrow-right"></i></button><p class="text-muted small mt-3">We reply within 2 hours on business days.</p></form></div></div></div></div></section>`,
+
+            getwebsite: `<section class="py-5"><div class="container"><div class="row justify-content-center"><div class="col-lg-8"><div class="text-center mb-4"><h1 class="display-5 fw-bold">Get Your <span class="hero-gradient">Website Today</span></h1><p class="fs-5 text-secondary">Answer a few questions and our team will craft your stunning online presence.</p></div><div class="glass-card p-5 bg-white rounded-4 shadow-sm"><form id="websiteForm"><div class="mb-3"><label class="form-label fw-semibold">Business name *</label><input type="text" class="form-control" required placeholder="Your brand name"></div><div class="mb-3"><label class="form-label fw-semibold">Website type</label><select class="form-select"><option>Business/Corporate</option><option>E-commerce</option><option>Portfolio</option><option>Blog/Magazine</option><option>Custom web app</option></select></div><div class="mb-3"><label class="form-label fw-semibold">Preferred pages (approx)</label><input type="number" class="form-control" placeholder="e.g. 5"></div><div class="mb-3"><label class="form-label fw-semibold">Budget range</label><select class="form-select"><option>$500 - $1,500</option><option>$1,500 - $3,000</option><option>$3,000 - $6,000</option><option>Custom / Enterprise</option></select></div><div class="mb-3"><label class="form-label fw-semibold">Project details</label><textarea rows="3" class="form-control" placeholder="Describe your vision, features, and timeline..."></textarea></div><button type="submit" class="btn btn-primary-custom w-100 py-3 fs-6">Submit request →</button><p class="text-center mt-3 small text-secondary">We'll contact you within 24h with a custom proposal.</p></form></div></div></div></div></section>`
+        };
+
+        // Render page
+        function renderPage(pageId) {
+            const content = pages[pageId] || pages.home;
+            document.getElementById('pageContent').innerHTML = content;
+            // Re-attach data-page click handlers after render
+            document.querySelectorAll('[data-page]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = el.getAttribute('data-page');
+                    if (targetPage && pages[targetPage]) {
+                        renderPage(targetPage);
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                        updateActiveNav(targetPage);
+                    }
+                });
+            });
+            // Handle forms after render
+            if (pageId === 'contact') {
+                const contactForm = document.getElementById('contactForm');
+                if (contactForm) contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert("✅ Thank you! BrysTech team will reach out shortly.");
+                });
+            }
+            if (pageId === 'getwebsite') {
+                const websiteForm = document.getElementById('websiteForm');
+                if (websiteForm) websiteForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert("🎉 Awesome! We've received your request. Expect a proposal within 24h.");
+                });
+            }
+        }
+
+        function updateActiveNav(page) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === page) link.classList.add('active');
+            });
+        }
+
+        // initial load
+        renderPage('home');
+        // bind nav clicks globally
+        document.querySelectorAll('[data-page]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = el.getAttribute('data-page');
+                if (page && pages[page]) {
+                    renderPage(page);
+                    window.scrollTo(0, 0);
+                    updateActiveNav(page);
+                }
+            });
+        });
+
+        // ======================== AI CHATBOT LOGIC ========================
+        const chatBtn = document.getElementById('aiChatBtn');
+        const chatModal = document.getElementById('chatModal');
+        const closeChat = document.getElementById('closeChatBtn');
+        const sendBtn = document.getElementById('sendChatBtn');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessagesDiv = document.getElementById('chatMessages');
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.innerText = text;
+            msgDiv.appendChild(bubble);
+            chatMessagesDiv.appendChild(msgDiv);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'message bot';
+            typingDiv.innerHTML = '<div class="typing-indicator">Brys AI is typing...</div>';
+            chatMessagesDiv.appendChild(typingDiv);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        function getBotResponse(userMsg) {
+            const msg = userMsg.toLowerCase();
+            if (msg.includes('price') || msg.includes('cost') || msg.includes('pricing')) {
+                return "💰 Our website plans start at $499 one-time for Starter (5 pages). Business plan $1,299, and Enterprise custom. We also offer app development from $2k. Want a custom quote?";
+            } else if (msg.includes('service') || msg.includes('offer') || msg.includes('do you')) {
+                return "🛠️ BrysTech offers: Web dev, Mobile apps, Software consulting, AI integration, Cloud solutions, and Cybersecurity. Anything specific you're interested in?";
+            } else if (msg.includes('career') || msg.includes('job') || msg.includes('join')) {
+                return "💼 We're hiring! Check our Careers page for Senior Dev, Product Manager, Customer Success, and more. Send your CV to careers@brystech.com!";
+            } else if (msg.includes('contact') || msg.includes('support') || msg.includes('reach')) {
+                return "📞 You can email hello@brystech.com, call +254 700 123 456, or fill the contact form on our Contact page. We reply fast!";
+            } else if (msg.includes('website') || msg.includes('get website')) {
+                return "🌐 To get your website, please visit our 'Get Website' page and fill the form. Packages start at $499 with free consultation. Need help? I'm here!";
+            } else if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+                return "👋 Hello! I'm your BrysTech AI guide. Ask me about pricing, services, careers, or how to start a project!";
+            } else {
+                return "🤖 Thanks for your message! For specific inquiries, please use our contact form or email hello@brystech.com. Meanwhile, I can tell you about our services, pricing, or careers. What would you like to know?";
+            }
+        }
+
+        async function handleSendMessage() {
+            const userText = chatInput.value.trim();
+            if (!userText) return;
+            addMessage(userText, 'user');
+            chatInput.value = '';
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                const reply = getBotResponse(userText);
+                addMessage(reply, 'bot');
+            }, 600);
+        }
+
+        sendBtn.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSendMessage();
+        });
+        chatBtn.addEventListener('click', () => {
+            chatModal.classList.toggle('hidden');
+        });
+        closeChat.addEventListener('click', () => {
+            chatModal.classList.add('hidden');
+        });
+        // initial hidden
+        chatModal.classList.add('hidden');
+    </script>
+</body>
+
+</html>
